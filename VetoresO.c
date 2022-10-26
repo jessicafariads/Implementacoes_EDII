@@ -58,7 +58,7 @@ void main(){
             mergeSort(V,0,tam-1);
             break;
         case 5:
-            quickSort(V,0,tam);
+            quickSort(V,0,tam-1);
             break;
         default:
             break;
@@ -122,14 +122,14 @@ void bubbleSort(int *V, int tam){//O(n²) no pior dos casos que é quando o veto
 }
 
 
-void merge (int *V, int inicio, int meio, int fim) {
-  int tamanho = fim - inicio + 1;
+void merge (int *V, int inicio, int meio, int fim) { // Função auxiliar que ordena os subvetores
+  int tamanho = fim - inicio + 1; // O vetor tem peli menos uma posição
   int parte1 = inicio;
   bool fimParte1 = false;
   int parte2 = meio + 1;
   bool fimParte2 = false;
   
-  int *temp = malloc (tamanho * sizeof(int));
+  int *temp = malloc (tamanho * sizeof(int)); // Aloca memoria para vetor auxiliar
 
   for (int i = 0; i < tamanho; i++) {
     if (!fimParte1 && !fimParte2) {
@@ -139,16 +139,16 @@ void merge (int *V, int inicio, int meio, int fim) {
         temp[i] = V[parte2++];
       }
 
-      if (parte1 > meio) { fimParte1 = true; }
-      if (parte2 > fim)  { fimParte2 = true; }
+      if (parte1 > meio) { fimParte1 = true; } // A primeira parte do vetor acabou
+      if (parte2 > fim)  { fimParte2 = true; } // A segunda parte do vetor acabou
     } else {
-      if (!fimParte1) { temp[i] = V[parte1++]; }
-      else { temp[i] = V[parte2++]; }
+      if (!fimParte1) { temp[i] = V[parte1++]; } // A segunda parte do vetor acabou então copiamos a primeira parte do vetor pro auxiliar
+      else { temp[i] = V[parte2++]; }           // A primeira parte do vetor acabou então copiamos a segunda parte do vetor pro auxiliar                 
     }
   }
 
   for (int j = 0, k = inicio; j < tamanho; j++, k++) {
-    V[k] = temp[j];
+    V[k] = temp[j]; // Passa o conteudo (sequencia ordenada) do vetor auxilar para V
   }
 
   free(temp);
@@ -156,8 +156,8 @@ void merge (int *V, int inicio, int meio, int fim) {
 }
 
 
-void mergeSort(int *V,int inicio, int fim){
-    int meio = 0;
+void mergeSort(int *V,int inicio, int fim){ // O(n log(n)) no pior ou melhor caso terá a mesma complexidade 
+    int meio = 0; 
 
     if (inicio < fim){
         meio = (inicio + fim)/2;
@@ -170,30 +170,32 @@ void mergeSort(int *V,int inicio, int fim){
     }
 }
 
-int particao(int *V, int p, int r){
-    int x=0, i=0, j=0, aux=0;
-    x = V[r];
-    i = p-1;
-    for ( j = p; j < r-1; j++){
-        if (V[j]<=x){
-            i = i+1;
-            aux = V[i];
-            V[i] = V[j];
-            V[j] = aux;
-        }
-        
+int particao(int *V, int inicio, int fim){  // Função auxiliar que ordena o vetor em partições de menores que o pivo 
+    int p = inicio;                         // e maiores que o pivo e retorna a posição do pivo
+    int r = fim;
+    int pivo = V[inicio]; // O pivo é o primeiro elemento do vetor
+    int aux;
+
+  while (p < r) {
+    while (V[p] <= pivo) { p++; }
+    while (V[r] > pivo) { r--; }
+
+    if (p < r) {
+      aux = V[p];
+      V[p] = V[r];
+      V[r] = aux;
     }
-    aux = V[i+1];
-    V[i+1] = V[r];
-    V[r] = aux;
-    
+  }
+    V[inicio] = V[r]; 
+    V[r] = pivo;
+    return r; // Posição do pivo
 }
 
-void quickSort(int *V, int p, int r){
-    int q=0;
-    if (p < r){
-        q = particao(V,p,r);
-        quickSort(V,p,q-1);
-        quickSort(V,q+1,r);
+void quickSort(int *V, int inicio, int fim){    // O(n²) no pior dos casos que é um vetor com numeros repetidos ou todos os elementos 
+    int q=0;                                    // do vetor serem maiores ou menores que o pivo
+    if (inicio < fim){
+        q = particao(V,inicio,fim);
+        quickSort(V,inicio,q-1);
+        quickSort(V,q+1,fim);
     }
 }
