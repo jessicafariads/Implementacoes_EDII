@@ -25,6 +25,7 @@ void main(){
     V = (int *) malloc (tam * sizeof(int)); //Cria um vetor de tamanho indicado pelo usuario
 
     srand(time(NULL)); //Altera a semente da função rand()
+                       // To usando essa função na esperança de aparecerem menos numeros repetidos
     for(i=0; i<tam; i++){
         V[i] = rand() % 10 + 1; //Preenche o vetor com numeros aleatorios de 1 à 10
     }
