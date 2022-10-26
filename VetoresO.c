@@ -10,10 +10,10 @@ void imprimeVetor(int *V, int tam);
 void selectionSort(int *V, int tam);
 void insertionSort(int *V, int tam);
 void bubbleSort(int *V, int tam);
-void merge1(int *V, int inicio, int meio, int fim);
+void merge(int *V, int inicio, int meio, int fim);
 void mergeSort(int *V,int inicio, int fim);
-int particao(int *V, int p, int r);
-void quickSort(int *V, int p, int r);
+int particao(int *V, int inicio, int fim);
+void quickSort(int *V, int inicio, int fim);
 
 
 void main(){
