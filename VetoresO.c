@@ -96,7 +96,7 @@ void selectionSort(int *V, int tam){ // O(n²) no pior dos casos que é o vetor 
     }
 }
 
-void insertionSort(int *V, int tam){ //O(N)
+void insertionSort(int *V, int tam){ //O(n²) no pior dos casos que é o vetor estar em ordem decrescente
     int i=0, j=0, aux=0;
     for(i=1; i<tam; i++){
         aux=V[i];
@@ -192,9 +192,9 @@ int particao(int *V, int inicio, int fim){  // Função auxiliar que ordena o ve
     return r; // Posição do pivo
 }
 
-void quickSort(int *V, int inicio, int fim){    // O(n²) no pior dos casos que é um vetor com numeros repetidos ou todos os elementos 
-    int q=0;                                    // do vetor serem maiores ou menores que o pivo
-    if (inicio < fim){
+void quickSort(int *V, int inicio, int fim){    // O(n²) no pior dos casos que é um vetor com numeros 
+    int q=0;                                    // repetidos ou todos os elementos 
+    if (inicio < fim){                          // do vetor serem maiores ou menores que o pivo
         q = particao(V,inicio,fim);
         quickSort(V,inicio,q-1);
         quickSort(V,q+1,fim);
