@@ -26,7 +26,7 @@ void main(){
 
     srand(time(NULL)); //Altera a semente da função rand()
     for(i=0; i<tam; i++){
-        V[i] = rand() % tam + 1; //Preenche o vetor com numeros aleatorios de 1 à tam
+        V[i] = rand() % 10 + 1; //Preenche o vetor com numeros aleatorios de 1 à 10
     }
 
      printf("\nVetor Gerado: [ ");
