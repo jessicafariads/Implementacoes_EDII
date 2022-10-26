@@ -47,24 +47,24 @@ void main(){
     
     switch(op){
         case 1:
-            selectionSort(V,tam);
+            selectionSort(V,tam); // linha 83
             break;
         case 2:
-            insertionSort(V,tam);
+            insertionSort(V,tam); // linha 99
             break;
         case 3:
-            bubbleSort(V,tam);
+            bubbleSort(V,tam);  // linha 111
             break;
         case 4:
-            mergeSort(V,0,tam-1);
+            mergeSort(V,0,tam-1); // linha 160
             break;
         case 5:
-            quickSort(V,0,tam-1);
+            quickSort(V,0,tam-1); // linha 195
             break;
         default:
             break;
     }
-    imprimeVetor(V,tam);
+    imprimeVetor(V,tam); // linha 72
     free(V);
 
 }
@@ -124,7 +124,7 @@ void bubbleSort(int *V, int tam){//O(n²) no pior dos casos que é quando o veto
 
 
 void merge (int *V, int inicio, int meio, int fim) { // Função auxiliar que ordena os subvetores
-  int tamanho = fim - inicio + 1; // O vetor tem peli menos uma posição
+  int tamanho = fim - inicio + 1; // O vetor tem pelo menos uma posição
   int parte1 = inicio;
   bool fimParte1 = false;
   int parte2 = meio + 1;
